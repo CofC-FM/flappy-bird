@@ -127,11 +127,15 @@ Flappy Bird
         let varvar;
         let punti=0;
         let nmax;
+        let se1=true;
+        let se2=true;
         if(!localStorage.getItem("max")){
             localStorage.setItem("max","")
         }
         let max = Number(localStorage.getItem("max"))
         function perso(vari,i){
+            se1=true
+            se2=true
             if(punti>max){
                 nmax = punti.toString()
                 localStorage.setItem("max",nmax)
@@ -160,6 +164,7 @@ Flappy Bird
             spot1=350;
             spot2=spot1+225;
             puntii=0;
+            punti=0;
             per=false}else{
                 per=true
             }
@@ -231,11 +236,19 @@ Flappy Bird
             if (varvar==10){
                 perso(1,0)
             }else{
-                if (varvar==1){
-                    puntii=puntii+1
+                if((spot1+50)<(spo)&&se1){
+                    punti=punti+1
+                    se1=false
+                    se2=true
+                }else{
+                    if((spot2+50)<(spo)&&se2){
+                        punti=punti+1
+                        se2=false
+                        se1=true
+                    }
                 }
             }
-            punti=puntii/26
+            //punti=puntii/26
             if (!debug){
             document.getElementById("uccello").innerHTML=`
                 <img style="position: absolute;
