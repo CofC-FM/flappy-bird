@@ -1,2 +1,5 @@
 # flappy-bird
-flappy bird in html
+Flappy Bird codificato in html
+prodotto da CofC-FM
+copyright sul codice
+leggere licenza nel file apposito "LICENZA.md"
