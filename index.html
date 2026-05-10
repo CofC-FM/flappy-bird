@@ -9,7 +9,7 @@ Flappy Bird
     <title>Flappy Bird</title>
     <link rel="shortcut icon" href="uccello.png" type="image/x-icon">
     <style>
-        button{
+        .button{
             position: absolute;
             top: -10px;
             left: -10px;
@@ -74,7 +74,9 @@ Flappy Bird
             left: 0px;"></span>
         <span style="top: 500px;border:0px;
             left: 0px;height: 70px;width: 300px;background-color: rgb(131,203 , 83);">
-            <h5>©CofC-FM</h5>
+            <h5><button onclick="info()" style="background-color:transparent;border:none;">©CofC-FM</button></h5>
+            <p id="info" style="opacity: 0;">Flappy bird prodotto da CofC-FM <br>Reposit GitHub <a href="https://github.com/CofC-FM/flappy-bird" title="Reposit ufficiale" >flappy-bird</a> <br>Il sito utilizza cookie per salvare il punteggio massimo, non vengono registrati altri dati oltre a questo</p>
+
         </span>
     </div>
 
@@ -97,11 +99,19 @@ Flappy Bird
     <div id="tubo">
 
     </div>
-    <button onclick="salta()"></button>
+    <button class="button" onclick="salta()"></button>
     <h3 id="punti"></h3>
     <h3 style="left: 170px;" id="max"></h3>
     
     <script>
+        function info(){
+            if(document.getElementById("info").style.opacity=="0"){
+                document.getElementById("info").style.opacity="1";
+            }else{
+                document.getElementById("info").style.opacity="0";
+
+            }
+        }
         let debug=false;
         function debugg(){
             if (debug){
@@ -116,7 +126,6 @@ Flappy Bird
             console.log("spot2:"+spot2)
         }
         let op;
-        let puntii=0;
         let per=false;
         const spo=57;
         let altz=100;
@@ -163,7 +172,6 @@ Flappy Bird
             document.getElementById("tubo").innerHTML=""
             spot1=350;
             spot2=spot1+225;
-            puntii=0;
             punti=0;
             per=false}else{
                 per=true
@@ -185,20 +193,20 @@ Flappy Bird
             let vri
             if ((spot1>spo && (spot1-30)<(spo))||(spot1<spo && (spot1+52)>spo)){
                 vri=1
-                if (altzt1<(altz+20)){
+                if (altzt1<(altz+24)){
                     vri=10
                 }
-                if ((altzt1-80)>(altz-7)){
+                if ((altzt1-80)>(altz)){
                     vri=10
                 }
                 
             }
             if ((spot2>spo&& (spot2-30)<(spo))||(spot2<spo && (spot2+52)>spo)){
                 vri=1
-                if (altzt2<(altz+20)){
+                if (altzt2<(altz+24)){
                     vri=10
                 }
-                if ((altzt2-80)>(altz-7)){
+                if ((altzt2-80)>(altz)){
                     vri=10
                 }
             }
@@ -232,24 +240,7 @@ Flappy Bird
                 }
                 }
             }
-            varvar=collisione()
-            if (varvar==10){
-                perso(1,0)
-            }else{
-                if((spot1+50)<(spo)&&se1){
-                    punti=punti+1
-                    se1=false
-                    se2=true
-                }else{
-                    if((spot2+50)<(spo)&&se2){
-                        punti=punti+1
-                        se2=false
-                        se1=true
-                    }
-                }
-            }
-            //punti=puntii/26
-            if (!debug&&!per){
+            if (!debug&&!per){//disegno gli spriete
             document.getElementById("uccello").innerHTML=`
                 <img style="position: absolute;
                 top:${altz}px;
@@ -281,6 +272,25 @@ Flappy Bird
                 transform: rotate(180deg);
                 "src="tubo.png" alt="Flappy Bird">
                 `;
+            }            
+            varvar=collisione()
+            if (varvar==10){
+                perso(1,0)
+            }else{
+                if((spot1+50)<(spo)&&se1){
+                    punti=punti+1
+                    se1=false
+                    se2=true
+                }else{
+                    if((spot2+50)<(spo)&&se2){
+                        punti=punti+1
+                        se2=false
+                        se1=true
+                    }
+                }
+            }
+            
+            if (!debug&&!per){//disegno i punti
             document.getElementById("punti").innerHTML=`
             Punti: \n ${Math.round(punti)} 
             `;
